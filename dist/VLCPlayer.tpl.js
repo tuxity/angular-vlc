@@ -1,4 +1,4 @@
-angular.module('kdarcel.vlc-player', ['VLCPlayer.tpl.html']);
+angular.module('kdarcel.vlc-player.tpl', ['VLCPlayer.tpl.html']);
 
 angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("VLCPlayer.tpl.html",

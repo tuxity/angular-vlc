@@ -36,7 +36,7 @@ module.exports = function(grunt) {
         html2js: {
             options: {
                 base: 'src',
-                module: 'kdarcel.vlc-player'
+                module: 'kdarcel.vlc-player.tpl'
             },
             main: {
                 src: ['src/*.tpl.html'],
