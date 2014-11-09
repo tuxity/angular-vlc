@@ -3,20 +3,7 @@ angular.module('kdarcel.vlc-player', [])
         return {
             restrict: 'E',
             replace: true,
-            template:
-            '<div>' +
-            '    <object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" events="true">' +
-            '        <embed pluginspage="http://www.videolan.org"' +
-            '               type="application/x-vlc-plugin"' +
-            '               version="VideoLAN.VLCPlugin.2"' +
-            '               width="100%"' +
-            '               height="100%"' +
-            '               toolbar="false"' +
-            '               branding="true"' +
-            '               id="vlc"' +
-            '        ></embed>' +
-            '    </object>' +
-            '</div>',
+            templateUrl: 'VLCPlayer.tpl.html',
             link: function (scope, element, attributes) {
                 var setupVlcPlayer = function(vlcData) {
                     if (vlcData.url && vlcData.filename) {
