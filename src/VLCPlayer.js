@@ -1,4 +1,12 @@
 angular.module('kdarcel.vlc-player', [])
+    .filter('range', function() {
+        return function(input, total) {
+            total = parseInt(total);
+            for (var i = 0; i < total; i++)
+                input.push(i);
+                return input;
+            };
+    })
     .directive('vlcplayer', function () {
         return {
             restrict: 'E',
@@ -32,6 +40,14 @@ angular.module('kdarcel.vlc-player', [])
 
                 scope.vlcToggleMute = function() {
                     scope.vlc.audio.toggleMute();
+                }
+
+                scope.vlcSwitchAudioTrack = function(trackNumber) {
+                    scope.vlc.audio.track = trackNumber;
+                }
+
+                scope.vlcSwitchSubtitleTrack = function(trackNumber) {
+                    scope.vlc.subtitle.track = trackNumber
                 }
 
                 scope.vlcToggleFullscreen = function() {

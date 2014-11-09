@@ -27,18 +27,32 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "                    <button type=\"button\" class=\"btn btn-default\" ng-click=\"vlcToggleMute()\">\n" +
     "                        <span class=\"glyphicon\" ng-class=\"vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'\"></span>\n" +
     "                    </button>\n" +
-    "                    <select class=\"form-control\">\n" +
-    "                        <option>Audio</option>\n" +
-    "                        <option>Piste 1</option>\n" +
-    "                        <option>Piste 2</option>\n" +
-    "                    </select>\n" +
-    "                    <select class=\"form-control\">\n" +
-    "                        <option>Subtitles</option>\n" +
-    "                        <option>Sub 1</option>\n" +
-    "                        <option>Sub 2</option>\n" +
-    "                    </select>\n" +
+    "                    <div class=\"btn-group\">\n" +
+    "                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n" +
+    "                            <span class=\"glyphicon glyphicon-sound-5-1\"></span>\n" +
+    "                        </button>\n" +
+    "                        <ul class=\"dropdown-menu\" role=\"menu\">\n" +
+    "                            <li ng-repeat=\"n in [] | range:vlc.audio.count\">\n" +
+    "                                <a href=\"\" ng-click=\"vlcSwitchAudioTrack(n)\">\n" +
+    "                                    {{ vlc.audio.description(n) }}&nbsp;<span class=\"glyphicon glyphicon-ok\" ng-show=\"vlc.audio.track == n\"></span>\n" +
+    "                                </a>\n" +
+    "                            </li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"btn-group\">\n" +
+    "                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n" +
+    "                            <span class=\"glyphicon glyphicon-subtitles\"></span>\n" +
+    "                        </button>\n" +
+    "                        <ul class=\"dropdown-menu\" role=\"menu\">\n" +
+    "                            <li ng-repeat=\"n in [] | range:vlc.subtitle.count\">\n" +
+    "                                <a href=\"\" ng-click=\"vlcSwitchSubtitleTrack(n)\">\n" +
+    "                                    {{ vlc.subtitle.description(n) }}&nbsp;<span class=\"glyphicon glyphicon-ok\" ng-show=\"vlc.subtitle.track == n\"></span>\n" +
+    "                                </a>\n" +
+    "                            </li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
     "                    <button type=\"button\" class=\"btn btn-default\" ng-click=\"vlcToggleFullscreen()\">\n" +
-    "                        <span class=\"glyphicon glyphicon-new-window\"></span>\n" +
+    "                        <span class=\"glyphicon glyphicon-resize-full\"></span>\n" +
     "                    </button>\n" +
     "                </div>\n" +
     "            </div>\n" +
