@@ -1,1 +1,12 @@
+# OS X
 .DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# node/npm
+npm-debug.log
+node_modules
+
+# bower
+bower_components
