@@ -1,3 +1,3 @@
-/*! VLCPlayer 2014-11-09 04:11:26 */
+/*! VLCPlayer 2014-11-09 04:11:38 */
 
 .video-container{position:relative;padding-bottom:56.25%;// dafuk ?}.video,.video-controls{width:100%;height:100%;top:0;left:0}.video{overflow:hidden;z-index:-1}.video-controls{position:absolute;z-index:1}.toolbar{height:9%;background:rgba(0,0,0,.3);opacity:0;filter:alpha(opacity=0);color:#fff}.toolbar:hover{opacity:1;filter:alpha(opacity=100)}.btn:active,.btn:focus{outline:0}
