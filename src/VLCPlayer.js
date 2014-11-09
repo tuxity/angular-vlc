@@ -25,6 +25,18 @@ angular.module('kdarcel.vlc-player', [])
                         'autoplay': attributes.vlcAutoplay
                     };
                 }, setupVlcPlayer, true);
+
+                scope.vlcTogglePause = function() {
+                    scope.vlc.playlist.togglePause();
+                }
+
+                scope.vlcToggleMute = function() {
+                    scope.vlc.audio.toggleMute();
+                }
+
+                scope.vlcToggleFullscreen = function() {
+                    scope.vlc.video.toggleFullscreen();
+                }
             }
         }
     });

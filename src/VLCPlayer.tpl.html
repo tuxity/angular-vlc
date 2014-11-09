@@ -1,13 +1,43 @@
 <div>
-    <object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" events="true">
-        <embed pluginspage="http://www.videolan.org"
-               type="application/x-vlc-plugin"
-               version="VideoLAN.VLCPlugin.2"
-               width="100%"
-               height="100%"
-               toolbar="false"
-               branding="true"
-               id="vlc"
-        ></embed>
-    </object>
+    <div class="video-container">
+        <div class="video">
+            <object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" events="true" width="100%" height="100%">
+                <embed pluginspage="http://www.videolan.org"
+                       type="application/x-vlc-plugin"
+                       version="VideoLAN.VLCPlugin.2"
+                       width="100%"
+                       height="100%"
+                       toolbar="false"
+                       branding="true"
+                       id="vlc"
+                ></embed>
+            </object>
+        </div>
+        <div class="video-controls">
+            <div class="toolbar">
+                <button type="button" class="btn btn-default pull-left" ng-click="vlcTogglePause()">
+                    <span class="glyphicon" ng-class="vlc.playlist.isPlaying ? 'glyphicon-pause' : 'glyphicon-play'"></span>
+                </button>
+                <span>{{ vlc.input.time | date:'HH:mm:ss' }} / {{ vlc.input.length | date:'HH:mm:ss' }}</span>
+                <div class="form-inline pull-right">
+                    <button type="button" class="btn btn-default" ng-click="vlcToggleMute()">
+                        <span class="glyphicon" ng-class="vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'"></span>
+                    </button>
+                    <select class="form-control">
+                        <option>Audio</option>
+                        <option>Piste 1</option>
+                        <option>Piste 2</option>
+                    </select>
+                    <select class="form-control">
+                        <option>Subtitles</option>
+                        <option>Sub 1</option>
+                        <option>Sub 2</option>
+                    </select>
+                    <button type="button" class="btn btn-default" ng-click="vlcToggleFullscreen()">
+                        <span class="glyphicon glyphicon-new-window"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
