@@ -3,6 +3,7 @@
 ._*
 .Spotlight-V100
 .Trashes
+tmp/
 
 # node/npm
 npm-debug.log

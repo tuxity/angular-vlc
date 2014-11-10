@@ -1,23 +1,37 @@
-/*
- * grunt-html2js
- * https://github.com/karlgoldstein/grunt-html2js
- *
- * Copyright (c) 2013 Karl Goldstein
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 module.exports = function(grunt) {
 
-    // Project configuration.
     grunt.initConfig({
+        html2js: {
+            options: {
+                module: 'kdarcel.vlc-player.tpl'
+            },
+            main: {
+                src: ['src/VLCPlayer.tpl.html'],
+                dest: 'tmp/VLCPlayer.tpl.js'
+            },
+        },
+        concat: {
+            options: {
+                stripBanners: true,
+                banner: '/*! VLCPlayer <%= grunt.template.today("yyyy-mm-dd hh:mm:ss") %> */\n'
+            },
+            jsconcat: {
+                src: ['src/*.js', 'tmp/*.js'],
+                dest: 'dist/VLCPlayer.js',
+            },
+            cssconcat: {
+                src: ['src/*.css'],
+                dest: 'dist/VLCPlayer.css',
+            },
+        },
         uglify: {
             options: {
                 banner: '/*! VLCPlayer <%= grunt.template.today("yyyy-mm-dd hh:mm:ss") %> */\n'
             },
             build: {
-                src: 'src/*.js',
+                src: 'dist/*.js',
                 dest: 'dist/VLCPlayer.min.js'
             }
         },
@@ -29,29 +43,19 @@ module.exports = function(grunt) {
             },
             build: {
                 files: {
-                    "dist/VLCPlayer.css": ["src/*.css"]
+                    "dist/VLCPlayer.min.css": ["src/*.css"]
                 }
             }
         },
-        html2js: {
-            options: {
-                base: 'src',
-                module: 'kdarcel.vlc-player.tpl'
-            },
-            main: {
-                src: ['src/*.tpl.html'],
-                dest: 'dist/VLCPlayer.tpl.js'
-            },
-        },
     });
 
+grunt.loadNpmTasks('grunt-html2js');
+grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-// These plugins provide necessary tasks.
 require('load-grunt-tasks')(grunt);
 
-// By default, lint and run all tests.
-grunt.registerTask('default', ['uglify', 'cssmin', 'html2js']);
+grunt.registerTask('default', ['html2js', 'concat', 'uglify', 'cssmin']);
 
 };
