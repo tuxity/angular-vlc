@@ -1,12 +1,23 @@
 {
   "name": "angular-vlc",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "An AngularJS directive to include VLC Web Player code with a more beautiful & advanced interface",
+  "author": "https://github.com/tuxity/angular-vlc/graphs/contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/tuxity/angular-vlc",
+  "main": [
+      "dist/VLCPlayer.js",
+      "dist/VLCPlayer.css",
+      "dist/VLCPlayer.min.js",
+      "dist/VLCPlayer.min.css"
+  ],
+  "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-cssmin": "~0.10.0",
-    "grunt-contrib-uglify": "~0.5.1",
+    "grunt-contrib-uglify": "~0.6.0",
     "grunt-html2js": "~0.2.9",
-    "load-grunt-tasks": "~0.2.0"
+    "load-grunt-tasks": "~1.0.0"
   }
 }
