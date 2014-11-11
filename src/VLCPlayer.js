@@ -18,7 +18,7 @@ angular.module('kdarcel.vlc-player', [])
 
             var durationString = "";
 
-            if (hours) durationString += ((hour < 10) ? "0" + hours : hours) + ":";
+            if (hours) durationString += ((hours < 10) ? "0" + hours : hours) + ":";
             durationString += ((minutes < 10) ? "0" + minutes : minutes) + ":";
             durationString += (seconds < 10) ? "0" + seconds : seconds;
 
