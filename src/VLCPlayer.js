@@ -4,10 +4,43 @@ angular.module('kdarcel.vlc-player', [])
             total = parseInt(total);
             for (var i = 0; i < total; i++)
                 input.push(i);
-                return input;
-            };
+            return input;
+        };
     })
-    .directive('vlcplayer', function () {
+    .filter('time2String', function() {
+        return function duration(duration) {
+            if (!duration)
+                return "";
+
+            var seconds = parseInt((duration / 1000) % 60);
+            var minutes = parseInt((duration / (1000 * 60)) % 60);
+            var hours   = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+            var durationString = "";
+
+            if (hours) durationString += ((hour < 10) ? "0" + hours : hours) + ":";
+            durationString += ((minutes < 10) ? "0" + minutes : minutes) + ":";
+            durationString += (seconds < 10) ? "0" + seconds : seconds;
+
+            return durationString;
+        };
+    })
+    .factory("poollingFactory", function ($timeout) {
+        var timeIntervalInSec = 1;
+
+        function callFnOnInterval(fn, timeInterval) {
+            var promise = $timeout(fn, 1000 * timeIntervalInSec);
+
+            return promise.then(function(){
+                callFnOnInterval(fn, timeInterval);
+            });
+        };
+
+        return {
+            callFnOnInterval: callFnOnInterval
+        };
+    })
+    .directive('vlcplayer', function (poollingFactory) {
         return {
             restrict: 'E',
             replace: true,
@@ -18,10 +51,20 @@ angular.module('kdarcel.vlc-player', [])
                         scope.vlc = document.getElementById("vlc");
                         if (scope.vlc)
                         {
+                            if (scope.vlc.playlist.items.count > 0)
+                                scope.vlc.playlist.items.clear();
+
                             var options = [":vout-filter=deinterlace", ":deinterlace-mode=linear"];
                             var id = scope.vlc.playlist.add(vlcData.url, vlcData.filename, options);
+
                             if (vlcData.autoplay == 'true')
                                 scope.vlc.playlist.playItem(id);
+
+                            // Until the video is completly launch
+                            // It's to avoid useless call on input lenght later, and set it once at beginning
+                            while (scope.vlc.input.hasVout == false);
+
+                            scope.videoDuration = scope.vlc.input.length;
                         }
                     }
                 }
@@ -53,6 +96,10 @@ angular.module('kdarcel.vlc-player', [])
                 scope.vlcToggleFullscreen = function() {
                     scope.vlc.video.toggleFullscreen();
                 }
+
+                poollingFactory.callFnOnInterval(function () {
+                    scope.videoCurrentTime = scope.vlc.input.time;
+                });
             }
         }
     });

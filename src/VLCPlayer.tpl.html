@@ -18,7 +18,7 @@
                 <button type="button" class="btn btn-default pull-left" ng-click="vlcTogglePause()">
                     <span class="glyphicon" ng-class="vlc.playlist.isPlaying ? 'glyphicon-pause' : 'glyphicon-play'"></span>
                 </button>
-                <span>{{ vlc.input.time | date:'HH:mm:ss' }} / {{ vlc.input.length | date:'HH:mm:ss' }}</span>
+                <span>{{ videoCurrentTime | time2String }} / {{ videoDuration | time2String }}</span>
                 <div class="form-inline pull-right">
                     <button type="button" class="btn btn-default" ng-click="vlcToggleMute()">
                         <span class="glyphicon" ng-class="vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'"></span>
