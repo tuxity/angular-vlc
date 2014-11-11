@@ -59,17 +59,15 @@ angular.module('kdarcel.vlc-player', [])
 
                             if (vlcData.autoplay == 'true')
                                 scope.vlc.playlist.playItem(id);
-
-                            // Until the video is completly launch
-                            // It's to avoid useless call on input lenght later, and set it once at beginning
-                            while (scope.vlc.input.hasVout == false);
-
-                            scope.videoDuration = scope.vlc.input.length;
                         }
                     }
                 }
 
                 scope.$watch(function () {
+                    // if the file is playing
+                    if (scope.vlc && vlc.input.state == 3 && scope.videoDuration == null)
+                        scope.videoDuration = scope.vlc.input.length;
+
                     return {
                         'url': attributes.vlcUrl,
                         'filename': attributes.vlcFilename,
@@ -98,7 +96,8 @@ angular.module('kdarcel.vlc-player', [])
                 }
 
                 poollingFactory.callFnOnInterval(function () {
-                    scope.videoCurrentTime = scope.vlc.input.time;
+                    if(scope.vlc)
+                        scope.videoCurrentTime = scope.vlc.input.time;
                 });
             }
         }
