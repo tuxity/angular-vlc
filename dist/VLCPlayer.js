@@ -1,4 +1,4 @@
-/*! VLCPlayer 2014-11-10 09:11:06 */
+/*! VLCPlayer 2014-11-14 10:11:41 */
 angular.module('kdarcel.vlc-player', [])
     .filter('range', function() {
         return function(input, total) {
@@ -19,7 +19,7 @@ angular.module('kdarcel.vlc-player', [])
 
             var durationString = "";
 
-            if (hours) durationString += ((hour < 10) ? "0" + hours : hours) + ":";
+            if (hours) durationString += ((hours < 10) ? "0" + hours : hours) + ":";
             durationString += ((minutes < 10) ? "0" + minutes : minutes) + ":";
             durationString += (seconds < 10) ? "0" + seconds : seconds;
 
@@ -60,23 +60,42 @@ angular.module('kdarcel.vlc-player', [])
 
                             if (vlcData.autoplay == 'true')
                                 scope.vlc.playlist.playItem(id);
-
-                            // Until the video is completly launch
-                            // It's to avoid useless call on input lenght later, and set it once at beginning
-                            while (scope.vlc.input.hasVout == false);
-
-                            scope.videoDuration = scope.vlc.input.length;
                         }
                     }
                 }
 
                 scope.$watch(function () {
+                    if (scope.vlc) {
+                        // if the file is playing
+                        if (vlc.input.state == 3 && scope.videoDuration == null) {
+                            scope.videoDuration = scope.vlc.input.length;
+                            scope.vlc.openning = false;
+                            scope.vlc.buffer = false;
+                        }
+                        // if there is an error
+                        if (vlc.input.state == 7 && scope.vlc.error == null)
+                            scope.vlc.error = true;
+
+                        // player is openning or is paused or is buffering or is stopping or is ended
+                        if (vlc.input.state == 4 || vlc.input.state == 5 || vlc.input.state == 6) {
+                            if (vlc.input.state == 2)
+                                scope.vlc.buffer = true;
+                            if (vlc.input.state == 1)
+                                scope.vlc.openning = true;
+                            scope.vlc.toolbar = true;
+                        }
+                    }
+                    
                     return {
                         'url': attributes.vlcUrl,
                         'filename': attributes.vlcFilename,
                         'autoplay': attributes.vlcAutoplay
                     };
                 }, setupVlcPlayer, true);
+
+                scope.vlcToolbarActive = function(isHover) {
+                    scope.vlc.toolbar = isHover;
+                }
 
                 scope.vlcTogglePause = function() {
                     scope.vlc.playlist.togglePause();
@@ -99,7 +118,10 @@ angular.module('kdarcel.vlc-player', [])
                 }
 
                 poollingFactory.callFnOnInterval(function () {
-                    scope.videoCurrentTime = scope.vlc.input.time;
+                    if(scope.vlc) {
+                        scope.videoCurrentTime = scope.vlc.input.time;
+                        scope.vlc.timer = ( scope.videoCurrentTime / scope.videoDuration ) * 100;
+                    }
                 });
             }
         }
@@ -109,33 +131,38 @@ angular.module('kdarcel.vlc-player.tpl', ['VLCPlayer.tpl.html']);
 
 angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("VLCPlayer.tpl.html",
-    "<div>\n" +
-    "    <div class=\"video-container\">\n" +
-    "        <div class=\"video\">\n" +
+    "<div class=\"player\">\n" +
+    "    <div class=\"player-container\" ng-mouseover=\"vlcToolbarActive(true);\" ng-mouseleave=\"vlcToolbarActive(false);\">\n" +
+    "        <div class=\"video-container\" ng-class=\"{true: 'player-blur' }[vlc.buffer == true]\">\n" +
     "            <object classid=\"clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921\" events=\"true\" width=\"100%\" height=\"100%\">\n" +
     "                <embed pluginspage=\"http://www.videolan.org\"\n" +
     "                       type=\"application/x-vlc-plugin\"\n" +
     "                       version=\"VideoLAN.VLCPlugin.2\"\n" +
     "                       width=\"100%\"\n" +
     "                       height=\"100%\"\n" +
+    "                       allowfullscreen=\"true\"\n" +
     "                       toolbar=\"false\"\n" +
-    "                       branding=\"true\"\n" +
+    "                       branding=\"false\"\n" +
+    "                       windowless=\"true\"\n" +
     "                       id=\"vlc\"\n" +
     "                ></embed>\n" +
     "            </object>\n" +
     "        </div>\n" +
     "        <div class=\"video-controls\">\n" +
-    "            <div class=\"toolbar\">\n" +
-    "                <button type=\"button\" class=\"btn btn-default pull-left\" ng-click=\"vlcTogglePause()\">\n" +
-    "                    <span class=\"glyphicon\" ng-class=\"vlc.playlist.isPlaying ? 'glyphicon-pause' : 'glyphicon-play'\"></span>\n" +
-    "                </button>\n" +
-    "                <span>{{ videoCurrentTime | time2String }} / {{ videoDuration | time2String }}</span>\n" +
-    "                <div class=\"form-inline pull-right\">\n" +
-    "                    <button type=\"button\" class=\"btn btn-default\" ng-click=\"vlcToggleMute()\">\n" +
-    "                        <span class=\"glyphicon\" ng-class=\"vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'\"></span>\n" +
+    "            <div class=\"toolbar\" ng-class=\"{true: 'toolbar-active', false: 'toolbar-disabled'}[vlc.error == true || vlc.toolbar == true]\">\n" +
+    "                <div class=\"progress\">\n" +
+    "                  <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"{{ vlc.timer }}\" aria-valuemin=\"0\" aria-valuemax=\"100\" ng-style=\"{width : ( vlc.timer + '%' ) }\">\n" +
+    "                  </div>\n" +
+    "                </div>\n" +
+    "                <div class=\"form-inline pull-left\">\n" +
+    "                    <button type=\"button\" class=\"btn btn-default btn-xs\" tooltip=\"Play/Pause\" ng-click=\"vlcTogglePause()\">\n" +
+    "                        <span class=\"glyphicon\" ng-class=\"vlc.playlist.isPlaying ? 'glyphicon-pause' : 'glyphicon-play'\"></span>\n" +
     "                    </button>\n" +
-    "                    <div class=\"btn-group\">\n" +
-    "                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n" +
+    "                    <span class=\"vlc-text-white\">{{ videoCurrentTime | time2String }} / {{ videoDuration | time2String }}</span>\n" +
+    "                </div>\n" +
+    "                <div class=\"form-inline pull-right\">\n" +
+    "                    <div class=\"btn-group dropup\" ng-if=\"vlc.audio.count\" dropdown>\n" +
+    "                        <button type=\"button\" class=\"btn btn-default btn-xs dropdown-toggle\" tooltip=\"Audio language\" data-toggle=\"dropdown\">\n" +
     "                            <span class=\"glyphicon glyphicon-sound-5-1\"></span>\n" +
     "                        </button>\n" +
     "                        <ul class=\"dropdown-menu\" role=\"menu\">\n" +
@@ -146,8 +173,8 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "                            </li>\n" +
     "                        </ul>\n" +
     "                    </div>\n" +
-    "                    <div class=\"btn-group\">\n" +
-    "                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n" +
+    "                    <div class=\"btn-group dropup\" ng-if=\"vlc.subtitle.count\" dropdown>\n" +
+    "                        <button type=\"button\" class=\"btn btn-default btn-xs dropdown-toggle\" tooltip=\"Subtitles\" data-toggle=\"dropdown\">\n" +
     "                            <span class=\"glyphicon glyphicon-subtitles\"></span>\n" +
     "                        </button>\n" +
     "                        <ul class=\"dropdown-menu\" role=\"menu\">\n" +
@@ -158,11 +185,31 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "                            </li>\n" +
     "                        </ul>\n" +
     "                    </div>\n" +
-    "                    <button type=\"button\" class=\"btn btn-default\" ng-click=\"vlcToggleFullscreen()\">\n" +
+    "                    <button type=\"button\" class=\"btn btn-default btn-xs\" tooltip=\"Audio Sounds\" ng-click=\"vlcToggleMute()\">\n" +
+    "                        <span class=\"glyphicon\" ng-class=\"vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'\"></span>\n" +
+    "                    </button>\n" +
+    "                    <div class=\"btn-group dropup\" dropdown>\n" +
+    "                        <button type=\"button\" class=\"btn btn-default btn-xs dropdown-toggle\" tooltip=\"Parameters\">\n" +
+    "                            <span class=\"glyphicon glyphicon-cog\"></span>\n" +
+    "                        </button>\n" +
+    "                        <ul class=\"dropdown-menu\">\n" +
+    "                            <li><a href=\"\"> About angular-vlc </a></li>\n" +
+    "                        </ul>\n" +
+    "                    </div>\n" +
+    "                    <button type=\"button\" class=\"btn btn-default btn-xs\" tooltip=\"Fullscreen\" ng-click=\"vlcToggleFullscreen()\">\n" +
     "                        <span class=\"glyphicon glyphicon-resize-full\"></span>\n" +
     "                    </button>\n" +
     "                </div>\n" +
     "            </div>\n" +
+    "        </div>\n" +
+    "        <div class=\"error-vlc\" ng-if=\"vlc.error\">\n" +
+    "            <p>There is an error with the link your given...</p>\n" +
+    "        </div>\n" +
+    "        <div class=\"error-vlc\" ng-if=\"vlc.buffer\">\n" +
+    "            <p>Video is actually buffering, please wait...</p>\n" +
+    "        </div>\n" +
+    "        <div class=\"error-vlc\" ng-if=\"vlc.openning\">\n" +
+    "            <p>Video will be open in few seconds...</p>\n" +
     "        </div>\n" +
     "    </div>\n" +
     "</div>\n" +

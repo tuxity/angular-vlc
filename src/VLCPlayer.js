@@ -64,16 +64,37 @@ angular.module('kdarcel.vlc-player', [])
                 }
 
                 scope.$watch(function () {
-                    // if the file is playing
-                    if (scope.vlc && vlc.input.state == 3 && scope.videoDuration == null)
-                        scope.videoDuration = scope.vlc.input.length;
+                    if (scope.vlc) {
+                        // if the file is playing
+                        if (vlc.input.state == 3 && scope.videoDuration == null) {
+                            scope.videoDuration = scope.vlc.input.length;
+                            scope.vlc.openning = false;
+                            scope.vlc.buffer = false;
+                        }
+                        // if there is an error
+                        if (vlc.input.state == 7 && scope.vlc.error == null)
+                            scope.vlc.error = true;
 
+                        // player is openning or is paused or is buffering or is stopping or is ended
+                        if (vlc.input.state == 4 || vlc.input.state == 5 || vlc.input.state == 6) {
+                            if (vlc.input.state == 2)
+                                scope.vlc.buffer = true;
+                            if (vlc.input.state == 1)
+                                scope.vlc.openning = true;
+                            scope.vlc.toolbar = true;
+                        }
+                    }
+                    
                     return {
                         'url': attributes.vlcUrl,
                         'filename': attributes.vlcFilename,
                         'autoplay': attributes.vlcAutoplay
                     };
                 }, setupVlcPlayer, true);
+
+                scope.vlcToolbarActive = function(isHover) {
+                    scope.vlc.toolbar = isHover;
+                }
 
                 scope.vlcTogglePause = function() {
                     scope.vlc.playlist.togglePause();
@@ -96,8 +117,10 @@ angular.module('kdarcel.vlc-player', [])
                 }
 
                 poollingFactory.callFnOnInterval(function () {
-                    if(scope.vlc)
+                    if(scope.vlc) {
                         scope.videoCurrentTime = scope.vlc.input.time;
+                        scope.vlc.timer = ( scope.videoCurrentTime / scope.videoDuration ) * 100;
+                    }
                 });
             }
         }

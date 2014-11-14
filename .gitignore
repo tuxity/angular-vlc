@@ -8,6 +8,6 @@ tmp/
 # node/npm
 npm-debug.log
 node_modules
-
+tmp
 # bower
 bower_components

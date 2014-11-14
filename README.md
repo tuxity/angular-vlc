@@ -30,7 +30,8 @@ Add the CSS
 Load the JavaScript file
 
 ```html
-<link rel="text/javascript" href="components/angular-vlc/dist/VLCPlayer.min.js">
+<script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="components/angular-vlc/dist/VLCPlayer.min.js"></script>
 ```
 
 
