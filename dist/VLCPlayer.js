@@ -1,4 +1,4 @@
-/*! VLCPlayer 2014-11-14 10:11:41 */
+/*! VLCPlayer 2014-11-15 12:11:00 */
 angular.module('kdarcel.vlc-player', [])
     .filter('range', function() {
         return function(input, total) {
@@ -60,6 +60,8 @@ angular.module('kdarcel.vlc-player', [])
 
                             if (vlcData.autoplay == 'true')
                                 scope.vlc.playlist.playItem(id);
+
+                            scope.vlc.version = scope.vlc.versionInfo();
                         }
                     }
                 }
@@ -111,6 +113,8 @@ angular.module('kdarcel.vlc-player', [])
 
                 scope.vlcSwitchSubtitleTrack = function(trackNumber) {
                     scope.vlc.subtitle.track = trackNumber
+                    console.log(trackNumber);
+                    console.log(vlc.subtitle.track);
                 }
 
                 scope.vlcToggleFullscreen = function() {
@@ -193,7 +197,8 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "                            <span class=\"glyphicon glyphicon-cog\"></span>\n" +
     "                        </button>\n" +
     "                        <ul class=\"dropdown-menu\">\n" +
-    "                            <li><a href=\"\"> About angular-vlc </a></li>\n" +
+    "                            <li><a href=\"https://github.com/Tuxity/angular-vlc/tree/v1.0.0\" target=\"blank\"> About angular-vlc </a></li>\n" +
+    "                            <li><a href=\"\"> VLC {{ vlc.version }}</a></li>\n" +
     "                        </ul>\n" +
     "                    </div>\n" +
     "                    <button type=\"button\" class=\"btn btn-default btn-xs\" tooltip=\"Fullscreen\" ng-click=\"vlcToggleFullscreen()\">\n" +

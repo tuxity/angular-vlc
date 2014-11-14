@@ -59,6 +59,8 @@ angular.module('kdarcel.vlc-player', [])
 
                             if (vlcData.autoplay == 'true')
                                 scope.vlc.playlist.playItem(id);
+
+                            scope.vlc.version = scope.vlc.versionInfo();
                         }
                     }
                 }
