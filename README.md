@@ -1,7 +1,7 @@
 angular-vlc
 ===========
 
-An AngularJS directive to include VLC Web Player code with a more beautiful &amp; advanced interface
+An [AngularJS](https://angularjs.org/) directive to include [VLC](http://www.videolan.org/) Web Player code with a more beautiful &amp; advanced interface
 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![devDependency Status](https://david-dm.org/tuxity/angular-vlc/dev-status.svg)](https://david-dm.org/tuxity/angular-vlc#info=devDependencies)
@@ -29,29 +29,34 @@ For OS X users, you can find the plugin (actually in beta) [here](https://www.dr
 
 ## Getting Started
 
-Install the component via Bower
+Install the component via [Bower](http://bower.io/)
 
 ```shell
 bower install --save angular-vlc
 ```
 
+Or simply download the files in the dist folder
+
 Add the CSS
+
 ```html
 <link rel="stylesheet" href="components/angular-vlc/dist/VLCPlayer.min.css">
 ```
 
 Load the JavaScript file
+
 ```html
-<script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-<script src="components/angular-vlc/dist/VLCPlayer.min.js"></script>
+<link rel="text/javascript" href="components/angular-vlc/dist/VLCPlayer.min.js">
 ```
 
 And finally add the dependencies to your AngularJS project
+
 ```javascript
 var myAppModule = angular.module('MyApp', ['kdarcel.vlc-player', 'kdarcel.vlc-player.tpl']);
 ```
 
 Now you can call the directive in your code
+
 ```html
 <vlcplayer vlc-url="" vlc-filename="" vlc-autoplay="true"></vlcplayer>
 ```
