@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "homepage": "https://github.com/Tuxity/angular-vlc",
   "authors": [
-    "Tuxity <kevin.darcel@gmail.com>"
+    "Tuxity <kevin.darcel@gmail.com>",
+    "martialdidit <martial.puygrenier@gmail.com>"
   ],
   "description": "An AngularJS directive to include VLC Web Player code with a more beautiful & advanced interface",
   "main": [
@@ -13,12 +14,14 @@
       "dist/VLCPlayer.min.css"
   ],
   "keywords": [
+    "video",
+    "player",
     "web player",
     "vlc",
-    "videolan"
+    "videolan",
+    "plugin"
   ],
   "license": "MIT",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
