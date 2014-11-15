@@ -1,83 +1,82 @@
-<div class="player">
-    <div class="player-container" ng-mouseover="vlcToolbarActive(true);" ng-mouseleave="vlcToolbarActive(false);">
-        <div class="video-container" ng-class="{true: 'player-blur' }[vlc.buffer == true]">
-            <object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" events="true" width="100%" height="100%">
-                <embed pluginspage="http://www.videolan.org"
-                       type="application/x-vlc-plugin"
-                       version="VideoLAN.VLCPlugin.2"
-                       width="100%"
-                       height="100%"
-                       allowfullscreen="true"
-                       toolbar="false"
-                       branding="false"
-                       windowless="true"
-                       id="vlc"
-                ></embed>
-            </object>
-        </div>
-        <div class="video-controls">
-            <div class="toolbar" ng-class="{true: 'toolbar-active', false: 'toolbar-disabled'}[vlc.error == true || vlc.toolbar == true]">
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="{{ vlc.timer }}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( vlc.timer + '%' ) }">
-                  </div>
-                </div>
-                <div class="form-inline pull-left">
-                    <button type="button" class="btn btn-default btn-xs" tooltip="Play/Pause" ng-click="vlcTogglePause()">
-                        <span class="glyphicon" ng-class="vlc.playlist.isPlaying ? 'glyphicon-pause' : 'glyphicon-play'"></span>
+<div class="player-container" id="player" ng-keydown="vlcKeyEvent($event);">
+    <div ng-class="{true: 'player-blur' }[vlc.buffer == true]">
+        <object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" events="true" width="100%" height="100%" tabindex="0">
+            <embed pluginspage="http://www.videolan.org"
+                   type="application/x-vlc-plugin"
+                   version="VideoLAN.VLCPlugin.2"
+                   allowfullscreen="true"
+                   width="640"
+                   height="360"
+                   toolbar="false"
+                   branding="false"
+                   windowless="true"
+                   id="vlc"
+                   ng-style="vlc.embedFullscreen"
+            ></embed>
+        </object>
+    </div>
+    <div class="video-controls" ng-mouseover="vlcToolbarActive(true);" ng-mouseleave="vlcToolbarActive(false);">
+        <div class="toolbar" ng-class="{true: 'toolbar-active', false: 'toolbar-disabled'}[vlc.error == true || vlc.toolbar == true]" ng-style="vlc.toolbarWidth">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{ vlc.timer }}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( vlc.timer + '%' ) }">
+              </div>
+            </div>
+            <div class="form-inline pull-left">
+                <button type="button" class="btn btn-default btn-xs" tooltip="Play/Pause" ng-click="vlcTogglePause()">
+                    <span class="glyphicon" ng-class="vlc.playlist.isPlaying ? 'glyphicon-pause' : 'glyphicon-play'"></span>
+                </button>
+                <span class="vlc-text-white">{{ videoCurrentTime | time2String }} / {{ videoDuration | time2String }}</span>
+            </div>
+            <div class="form-inline pull-right">
+                <div class="btn-group dropup" ng-if="vlc.audio.count" dropdown>
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" tooltip="Audio language" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-sound-5-1"></span>
                     </button>
-                    <span class="vlc-text-white">{{ videoCurrentTime | time2String }} / {{ videoDuration | time2String }}</span>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="n in [] | range:vlc.audio.count">
+                            <a href="" ng-click="vlcSwitchAudioTrack(n)">
+                                {{ vlc.audio.description(n) }}&nbsp;<span class="glyphicon glyphicon-ok" ng-show="vlc.audio.track == n"></span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="form-inline pull-right">
-                    <div class="btn-group dropup" ng-if="vlc.audio.count" dropdown>
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" tooltip="Audio language" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-sound-5-1"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li ng-repeat="n in [] | range:vlc.audio.count">
-                                <a href="" ng-click="vlcSwitchAudioTrack(n)">
-                                    {{ vlc.audio.description(n) }}&nbsp;<span class="glyphicon glyphicon-ok" ng-show="vlc.audio.track == n"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="btn-group dropup" ng-if="vlc.subtitle.count" dropdown>
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" tooltip="Subtitles" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-subtitles"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li ng-repeat="n in [] | range:vlc.subtitle.count">
-                                <a href="" ng-click="vlcSwitchSubtitleTrack(n)">
-                                    {{ vlc.subtitle.description(n) }}&nbsp;<span class="glyphicon glyphicon-ok" ng-show="vlc.subtitle.track == n"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn btn-default btn-xs" tooltip="Audio Sounds" ng-click="vlcToggleMute()">
-                        <span class="glyphicon" ng-class="vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'"></span>
+                <div class="btn-group dropup" ng-if="vlc.subtitle.count" dropdown>
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" tooltip="Subtitles" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-subtitles"></span>
                     </button>
-                    <div class="btn-group dropup" dropdown>
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" tooltip="Parameters">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="https://github.com/Tuxity/angular-vlc/tree/v1.0.0" target="blank"> About angular-vlc </a></li>
-                            <li><a href=""> VLC {{ vlc.version }}</a></li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn btn-default btn-xs" tooltip="Fullscreen" ng-click="vlcToggleFullscreen()">
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="n in [] | range:vlc.subtitle.count">
+                            <a href="" ng-click="vlcSwitchSubtitleTrack(n)">
+                                {{ vlc.subtitle.description(n) }}&nbsp;<span class="glyphicon glyphicon-ok" ng-show="vlc.subtitle.track == n"></span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+                <button type="button" class="btn btn-default btn-xs" tooltip="Audio Sounds" ng-click="vlcToggleMute()">
+                    <span class="glyphicon" ng-class="vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'"></span>
+                </button>
+                <div class="btn-group dropup" dropdown>
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" tooltip="Parameters">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://github.com/Tuxity/angular-vlc/tree/v1.0.0" target="blank"> About angular-vlc </a></li>
+                        <li><a href=""> VLC {{ vlc.version }}</a></li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-default btn-xs" tooltip="Fullscreen" ng-click="vlcToggleFullscreen()">
+                    <span class="glyphicon glyphicon-resize-full"></span>
+                </button>
             </div>
         </div>
-        <div class="error-vlc" ng-if="vlc.error">
-            <p>There is an error with the link your given...</p>
-        </div>
-        <div class="error-vlc" ng-if="vlc.buffer">
-            <p>Video is actually buffering, please wait...</p>
-        </div>
-        <div class="error-vlc" ng-if="vlc.openning">
-            <p>Video will be open in few seconds...</p>
-        </div>
+    </div>
+    <div class="error-vlc" ng-if="vlc.error">
+        <p>There is an error with the link your given...</p>
+    </div>
+    <div class="error-vlc" ng-if="vlc.buffer">
+        <p>Video is actually buffering, please wait...</p>
+    </div>
+    <div class="error-vlc" ng-if="vlc.openning">
+        <p>Video will be open in few seconds...</p>
     </div>
 </div>

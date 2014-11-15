@@ -61,6 +61,7 @@ angular.module('kdarcel.vlc-player', [])
                                 scope.vlc.playlist.playItem(id);
 
                             scope.vlc.version = scope.vlc.versionInfo();
+                            scope.vlc.toolbarWidth = {"width": '640'};
                         }
                     }
                 }
@@ -68,8 +69,9 @@ angular.module('kdarcel.vlc-player', [])
                 scope.$watch(function () {
                     if (scope.vlc) {
                         // if the file is playing
-                        if (vlc.input.state == 3 && scope.videoDuration == null) {
-                            scope.videoDuration = scope.vlc.input.length;
+                        if (vlc.input.state == 3) {
+                            if (scope.videoDuration == null)
+                                scope.videoDuration = scope.vlc.input.length;
                             scope.vlc.openning = false;
                             scope.vlc.buffer = false;
                         }
@@ -94,6 +96,10 @@ angular.module('kdarcel.vlc-player', [])
                     };
                 }, setupVlcPlayer, true);
 
+                scope.vlcKeyEvent = function(event) {
+                    scope.vlc.playlist.togglePause();
+                }
+
                 scope.vlcToolbarActive = function(isHover) {
                     scope.vlc.toolbar = isHover;
                 }
@@ -115,7 +121,34 @@ angular.module('kdarcel.vlc-player', [])
                 }
 
                 scope.vlcToggleFullscreen = function() {
-                    scope.vlc.video.toggleFullscreen();
+
+                    var pos = scope.vlc.input.position;
+                    scope.vlc.playlist.stop();
+                    var elem = document.getElementById("player");
+                    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+                        scope.vlc.embedFullscreen = {'width': screen.width, 'height': screen.height};
+                        scope.vlc.toolbarWidth = {'width': screen.width};
+                        if (elem.requestFullscreen)
+                          elem.requestFullscreen();
+                        else if (elem.msRequestFullscreen)
+                          elem.msRequestFullscreen();
+                        else if (elem.mozRequestFullScreen)
+                          elem.mozRequestFullScreen();
+                        else if (elem.webkitRequestFullscreen)
+                          elem.webkitRequestFullscreen();
+                    } else {
+                        scope.vlc.embedFullscreen = { 'width': '640', 'height': '360'};
+                        scope.vlc.toolbarWidth = {'width': '640'};
+                        if (document.cancelFullScreen) {
+                          document.cancelFullScreen();
+                        } else if (document.mozCancelFullScreen) {
+                          document.mozCancelFullScreen();
+                        } else if (document.webkitCancelFullScreen) {
+                          document.webkitCancelFullScreen();
+                        }
+                    }
+                    scope.vlc.playlist.play();
+                    scope.vlc.input.position = pos;
                 }
 
                 poollingFactory.callFnOnInterval(function () {

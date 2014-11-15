@@ -1,43 +1,17 @@
-/*! VLCPlayer 2014-11-15 12:11:00 */
-.player {
-    text-align: center;
-}
-
-@media screen and (min-width:992px) {
-
-  .player-container {
-    margin: auto;
-    width: 58%;
-  }
-
-}
-
-.video-container {
-  width: 100%; height: 0;
-  padding-bottom: 56.25%;
-  overflow: hidden;
-  position: relative;
-}
-
-#vlc {
-  width: 100%; height: 100%;
-  top: 0; left: 0;
-  position: absolute;
-}
-
+/*! VLCPlayer 2014-11-15 10:11:50 */
 .toolbar {
     background: rgba(32, 32, 32, 1);
     height: 30px;
-    margin-top: -30px; /* place in the player */
+    margin-top: -35px; /* place in the player */
     position: relative;
 }
 
 .toolbar-disabled {
-    -webkit-animation: fadeout 1s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadeout 1s; /* Firefox < 16 */
-        -ms-animation: fadeout 1s; /* Internet Explorer */
-         -o-animation: fadeout 1s; /* Opera < 11.5.1 */
-            animation: fadeout 1s;
+    -webkit-animation: fadeout 3s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadeout 3s; /* Firefox < 16 */
+        -ms-animation: fadeout 3s; /* Internet Explorer */
+         -o-animation: fadeout 3s; /* Opera < 11.5.1 */
+            animation: fadeout 3s;
     opacity: 0;
 }
 
