@@ -20,5 +20,9 @@
     "grunt-html2js": "~0.2.9",
     "load-grunt-tasks": "~1.0.0",
     "grunt-cli": "~0.1.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tuxity/angular-vlc.git"
   }
 }
