@@ -123,8 +123,8 @@ angular.module('kdarcel.vlc-player', [])
                 }
 
                 scope.vlcToggleFullscreen = function() {
-                    scope.vlc.playlist.stop();
                     var pos = scope.vlc.input.position;
+                    scope.vlc.playlist.stop();
 
                     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
                         scope.vlc.embedFullscreen = {'width': screen.width, 'height': screen.height};
@@ -152,8 +152,8 @@ angular.module('kdarcel.vlc-player', [])
                         }
                     }
 
-                    scope.vlc.input.position = pos;
                     scope.vlc.playlist.play();
+                    scope.vlc.input.position = pos;
                 }
 
                 poollingFactory.callFnOnInterval(function () {
