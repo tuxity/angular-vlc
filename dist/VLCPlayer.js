@@ -1,4 +1,4 @@
-/*! VLCPlayer 2014-11-16 11:11:07 */
+/*! VLCPlayer 2014-11-28 09:11:21 */
 angular.module('kdarcel.vlc-player', [])
     .filter('range', function() {
         return function(input, total) {
