@@ -128,8 +128,8 @@ angular.module('kdarcel.vlc-player', [])
                     scope.vlc.playlist.stop();
 
                     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
-                        scope.vlc.embedFullscreen = {'width': screen.width, 'height': screen.height};
-                        scope.vlc.toolbarWidth = {'width': screen.width};
+                        scope.vlc.embedFullscreen = {'position':'fixed','right':'0px','top':'0px','width': screen.width, 'height': screen.height};
+                        scope.vlc.toolbarWidth = {'position':'fixed','bottom':'0px','right':'0px','width': screen.width};
 
                         var elem = document.getElementById("player");
                         if (elem.requestFullscreen)
