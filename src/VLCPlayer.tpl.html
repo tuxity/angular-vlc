@@ -1,5 +1,5 @@
 <div class="player-container" id="player" ng-keydown="vlcKeyEvent($event);">
-    <div ng-class="{true: 'player-blur' }[vlc.buffer == true]">
+    <div ng-class="{true: 'player-blur-vlc' }[vlc.buffer == true]">
         <object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" events="true" width="100%" height="100%" tabindex="0">
             <embed pluginspage="http://www.videolan.org"
                    type="application/x-vlc-plugin"
@@ -16,20 +16,20 @@
         </object>
     </div>
     <div class="video-controls" ng-mouseover="vlcToolbarActive(true);" ng-mouseleave="vlcToolbarActive(false);">
-        <div class="toolbar" ng-class="{true: 'toolbar-active', false: 'toolbar-disabled'}[vlc.error == true || vlc.toolbar == true]" ng-style="vlc.toolbarWidth">
-            <div class="progress">
+        <div class="toolbar-vlc" ng-class="{true: 'toolbar-active-vlc', false: 'toolbar-disabled-vlc'}[vlc.error == true || vlc.toolbar == true]" ng-style="vlc.toolbarWidth">
+            <div class="progress-vlc">
               <div class="progress-bar" role="progressbar" aria-valuenow="{{ vlc.timer }}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( vlc.timer + '%' ) }">
               </div>
             </div>
             <div class="form-inline pull-left">
-                <button type="button" class="btn btn-default btn-xs" tooltip="Play/Pause" ng-click="vlcTogglePause()">
+                <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Play/Pause" ng-click="vlcTogglePause()">
                     <span class="glyphicon" ng-class="vlc.playlist.isPlaying ? 'glyphicon-pause' : 'glyphicon-play'"></span>
                 </button>
                 <span class="vlc-text-white">{{ videoCurrentTime | time2String }} / {{ videoDuration | time2String }}</span>
             </div>
             <div class="form-inline pull-right">
                 <div class="btn-group dropup" ng-if="vlc.audio.count" dropdown>
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" tooltip="Audio language" data-toggle="dropdown">
+                    <button type="button" class="btn btn-default btn-default-vlc btn-xs dropdown-toggle" tooltip="Audio language" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-sound-5-1"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -41,7 +41,7 @@
                     </ul>
                 </div>
                 <div class="btn-group dropup" ng-if="vlc.subtitle.count" dropdown>
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" tooltip="Subtitles" data-toggle="dropdown">
+                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs dropdown-toggle" tooltip="Subtitles" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-subtitles"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -52,11 +52,11 @@
                         </li>
                     </ul>
                 </div>
-                <button type="button" class="btn btn-default btn-xs" tooltip="Audio Sounds" ng-click="vlcToggleMute()">
+                <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Audio Sounds" ng-click="vlcToggleMute()">
                     <span class="glyphicon" ng-class="vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'"></span>
                 </button>
                 <div class="btn-group dropup" dropdown>
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" tooltip="Parameters">
+                    <button type="button" class="btn btn-default btn-default-vlc btn-xs dropdown-toggle" tooltip="Parameters">
                         <span class="glyphicon glyphicon-cog"></span>
                     </button>
                     <ul class="dropdown-menu">
@@ -64,7 +64,7 @@
                         <li><a href=""> VLC {{ vlc.version }}</a></li>
                     </ul>
                 </div>
-                <button type="button" class="btn btn-default btn-xs" tooltip="Fullscreen" ng-click="vlcToggleFullscreen()">
+                <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Fullscreen" ng-click="vlcToggleFullscreen()">
                     <span class="glyphicon glyphicon-resize-full"></span>
                 </button>
             </div>

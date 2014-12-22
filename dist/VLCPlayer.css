@@ -1,12 +1,12 @@
-/*! VLCPlayer 2014-11-28 09:11:21 */
-.toolbar {
+/*! VLCPlayer 2014-12-22 06:12:10 */
+.toolbar-vlc {
     background: rgba(32, 32, 32, 1);
     height: 30px;
     margin-top: -35px; /* place in the player */
     position: relative;
 }
 
-.toolbar-disabled {
+.toolbar-disabled-vlc {
     -webkit-animation: fadeout 3s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadeout 3s; /* Firefox < 16 */
         -ms-animation: fadeout 3s; /* Internet Explorer */
@@ -15,7 +15,7 @@
     opacity: 0;
 }
 
-.toolbar-active {
+.toolbar-active-vlc {
     -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 1s; /* Firefox < 16 */
         -ms-animation: fadein 1s; /* Internet Explorer */
@@ -82,7 +82,7 @@
     to   { opacity: 0; }
 }
 
-.progress {
+.progress-vlc {
     height: 5px;
     margin-bottom: 1px;
     border-radius: 0px;
@@ -94,12 +94,12 @@
     position: relative;
 }
 
-.player-blur {
+.player-blur-vlc {
     -webkit-filter: blur(5px);
     filter: blur(5px);
 }
 
-.btn-default {
+.btn-default-vlc {
     background: rgba(32, 32, 32, 1);
     border-color: rgba(32, 32, 32, 1);
     color: rgba(212, 212, 212, 1);
@@ -110,7 +110,7 @@
     font-size: 12px;
 }
 
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+.btn-default-vlc:hover, .btn-default-vlc:focus, .btn-default-vlc:active, .btn-default-vlc.active, .open>.dropdown-toggle.btn-default-vlc {
     color: white;
     -webkit-filter: brightness(150%);
     background: rgba(32, 32, 32, 1);

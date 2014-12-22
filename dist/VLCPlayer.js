@@ -1,4 +1,4 @@
-/*! VLCPlayer 2014-11-28 09:11:21 */
+/*! VLCPlayer 2014-12-22 06:12:10 */
 angular.module('kdarcel.vlc-player', [])
     .filter('range', function() {
         return function(input, total) {
@@ -172,7 +172,7 @@ angular.module('kdarcel.vlc-player.tpl', ['VLCPlayer.tpl.html']);
 angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("VLCPlayer.tpl.html",
     "<div class=\"player-container\" id=\"player\" ng-keydown=\"vlcKeyEvent($event);\">\n" +
-    "    <div ng-class=\"{true: 'player-blur' }[vlc.buffer == true]\">\n" +
+    "    <div ng-class=\"{true: 'player-blur-vlc' }[vlc.buffer == true]\">\n" +
     "        <object classid=\"clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921\" events=\"true\" width=\"100%\" height=\"100%\" tabindex=\"0\">\n" +
     "            <embed pluginspage=\"http://www.videolan.org\"\n" +
     "                   type=\"application/x-vlc-plugin\"\n" +
@@ -189,20 +189,20 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "        </object>\n" +
     "    </div>\n" +
     "    <div class=\"video-controls\" ng-mouseover=\"vlcToolbarActive(true);\" ng-mouseleave=\"vlcToolbarActive(false);\">\n" +
-    "        <div class=\"toolbar\" ng-class=\"{true: 'toolbar-active', false: 'toolbar-disabled'}[vlc.error == true || vlc.toolbar == true]\" ng-style=\"vlc.toolbarWidth\">\n" +
-    "            <div class=\"progress\">\n" +
+    "        <div class=\"toolbar-vlc\" ng-class=\"{true: 'toolbar-active-vlc', false: 'toolbar-disabled-vlc'}[vlc.error == true || vlc.toolbar == true]\" ng-style=\"vlc.toolbarWidth\">\n" +
+    "            <div class=\"progress-vlc\">\n" +
     "              <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"{{ vlc.timer }}\" aria-valuemin=\"0\" aria-valuemax=\"100\" ng-style=\"{width : ( vlc.timer + '%' ) }\">\n" +
     "              </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-inline pull-left\">\n" +
-    "                <button type=\"button\" class=\"btn btn-default btn-xs\" tooltip=\"Play/Pause\" ng-click=\"vlcTogglePause()\">\n" +
+    "                <button type=\"button\" class=\"btn btn-default btn-default-vlc btn-xs\" tooltip=\"Play/Pause\" ng-click=\"vlcTogglePause()\">\n" +
     "                    <span class=\"glyphicon\" ng-class=\"vlc.playlist.isPlaying ? 'glyphicon-pause' : 'glyphicon-play'\"></span>\n" +
     "                </button>\n" +
     "                <span class=\"vlc-text-white\">{{ videoCurrentTime | time2String }} / {{ videoDuration | time2String }}</span>\n" +
     "            </div>\n" +
     "            <div class=\"form-inline pull-right\">\n" +
     "                <div class=\"btn-group dropup\" ng-if=\"vlc.audio.count\" dropdown>\n" +
-    "                    <button type=\"button\" class=\"btn btn-default btn-xs dropdown-toggle\" tooltip=\"Audio language\" data-toggle=\"dropdown\">\n" +
+    "                    <button type=\"button\" class=\"btn btn-default btn-default-vlc btn-xs dropdown-toggle\" tooltip=\"Audio language\" data-toggle=\"dropdown\">\n" +
     "                        <span class=\"glyphicon glyphicon-sound-5-1\"></span>\n" +
     "                    </button>\n" +
     "                    <ul class=\"dropdown-menu\" role=\"menu\">\n" +
@@ -214,7 +214,7 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "                    </ul>\n" +
     "                </div>\n" +
     "                <div class=\"btn-group dropup\" ng-if=\"vlc.subtitle.count\" dropdown>\n" +
-    "                    <button type=\"button\" class=\"btn btn-default btn-xs dropdown-toggle\" tooltip=\"Subtitles\" data-toggle=\"dropdown\">\n" +
+    "                    <button type=\"button\" class=\"btn btn-default  btn-default-vlc btn-xs dropdown-toggle\" tooltip=\"Subtitles\" data-toggle=\"dropdown\">\n" +
     "                        <span class=\"glyphicon glyphicon-subtitles\"></span>\n" +
     "                    </button>\n" +
     "                    <ul class=\"dropdown-menu\" role=\"menu\">\n" +
@@ -225,11 +225,11 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "                        </li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
-    "                <button type=\"button\" class=\"btn btn-default btn-xs\" tooltip=\"Audio Sounds\" ng-click=\"vlcToggleMute()\">\n" +
+    "                <button type=\"button\" class=\"btn btn-default btn-default-vlc btn-xs\" tooltip=\"Audio Sounds\" ng-click=\"vlcToggleMute()\">\n" +
     "                    <span class=\"glyphicon\" ng-class=\"vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'\"></span>\n" +
     "                </button>\n" +
     "                <div class=\"btn-group dropup\" dropdown>\n" +
-    "                    <button type=\"button\" class=\"btn btn-default btn-xs dropdown-toggle\" tooltip=\"Parameters\">\n" +
+    "                    <button type=\"button\" class=\"btn btn-default btn-default-vlc btn-xs dropdown-toggle\" tooltip=\"Parameters\">\n" +
     "                        <span class=\"glyphicon glyphicon-cog\"></span>\n" +
     "                    </button>\n" +
     "                    <ul class=\"dropdown-menu\">\n" +
@@ -237,7 +237,7 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "                        <li><a href=\"\"> VLC {{ vlc.version }}</a></li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
-    "                <button type=\"button\" class=\"btn btn-default btn-xs\" tooltip=\"Fullscreen\" ng-click=\"vlcToggleFullscreen()\">\n" +
+    "                <button type=\"button\" class=\"btn btn-default btn-default-vlc btn-xs\" tooltip=\"Fullscreen\" ng-click=\"vlcToggleFullscreen()\">\n" +
     "                    <span class=\"glyphicon glyphicon-resize-full\"></span>\n" +
     "                </button>\n" +
     "            </div>\n" +
