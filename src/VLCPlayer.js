@@ -1,4 +1,8 @@
 angular.module('kdarcel.vlc-player', [])
+    .constant('VERSION', 'v1.1.1')
+    .run(function ($rootScope, VERSION) {
+        $rootScope.version = VERSION
+    })
     .filter('range', function() {
         return function(input, total) {
             total = parseInt(total);

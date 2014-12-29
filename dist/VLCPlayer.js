@@ -1,5 +1,9 @@
-/*! VLCPlayer 2014-12-22 06:12:10 */
+/*! VLCPlayer 2014-12-28 06:12:39 */
 angular.module('kdarcel.vlc-player', [])
+    .constant('VERSION', 'v1.1.1')
+    .run(function ($rootScope, VERSION) {
+        $rootScope.version = VERSION
+    })
     .filter('range', function() {
         return function(input, total) {
             total = parseInt(total);
@@ -233,7 +237,7 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "                        <span class=\"glyphicon glyphicon-cog\"></span>\n" +
     "                    </button>\n" +
     "                    <ul class=\"dropdown-menu\">\n" +
-    "                        <li><a href=\"https://github.com/Tuxity/angular-vlc/tree/v1.0.0\" target=\"blank\"> About angular-vlc </a></li>\n" +
+    "                        <li><a href=\"https://github.com/Tuxity/angular-vlc/tree/{{ version }}\" target=\"blank\"> About angular-vlc </a></li>\n" +
     "                        <li><a href=\"\"> VLC {{ vlc.version }}</a></li>\n" +
     "                    </ul>\n" +
     "                </div>\n" +
@@ -252,5 +256,6 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "    <div class=\"error-vlc\" ng-if=\"vlc.openning\">\n" +
     "        <p>Video will be open in few seconds...</p>\n" +
     "    </div>\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
