@@ -6,6 +6,14 @@
     position: relative;
 }
 
+.toolbar-vlc-fullscreen{
+    background: rgba(32, 32, 32, 1);
+    height: 30px;
+    position: fixed;
+    bottom:0px;
+    left:0px;
+}
+
 .toolbar-disabled-vlc {
     -webkit-animation: fadeout 3s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadeout 3s; /* Firefox < 16 */
@@ -22,6 +30,18 @@
          -o-animation: fadein 1s; /* Opera < 11.5.1 */
             animation: fadein 1s;
     opacity: 1;
+}
+
+.vlc-window{
+    position:relative;
+    width:640px;
+    height:360px;
+}
+
+.vlc-fullscreen{
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
 @keyframes fadein {
