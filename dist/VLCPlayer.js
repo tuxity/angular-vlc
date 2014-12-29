@@ -67,6 +67,8 @@ angular.module('kdarcel.vlc-player', [])
 
                             scope.vlc.version = scope.vlc.versionInfo();
                             scope.vlc.toolbarWidth = {"width": '640'};
+                            scope.vlc.toolbarClass = 'toolbar-vlc';
+                            scope.vlc.fullscreenClass = 'vlc-window';
                         }
                     }
                 }
@@ -134,7 +136,9 @@ angular.module('kdarcel.vlc-player', [])
                     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
                         scope.vlc.embedFullscreen = {'width': screen.width, 'height': screen.height};
                         scope.vlc.toolbarWidth = {'width': screen.width};
-
+                        scope.vlc.toolbarClass = 'toolbar-vlc-fullscreen';
+                        scope.vlc.fullscreenClass = 'vlc-fullscreen';
+                        
                         var elem = document.getElementById("player");
                         if (elem.requestFullscreen)
                           elem.requestFullscreen();
@@ -147,7 +151,9 @@ angular.module('kdarcel.vlc-player', [])
                     } else {
                         scope.vlc.embedFullscreen = { 'width': '640', 'height': '360'};
                         scope.vlc.toolbarWidth = {'width': '640'};
-
+                        scope.vlc.toolbarClass = 'toolbar-vlc';
+                        scope.vlc.fullscreenClass = 'vlc-window';
+                        
                         if (document.cancelFullScreen) {
                           document.cancelFullScreen();
                         } else if (document.mozCancelFullScreen) {
@@ -176,7 +182,7 @@ angular.module('kdarcel.vlc-player.tpl', ['VLCPlayer.tpl.html']);
 angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("VLCPlayer.tpl.html",
     "<div class=\"player-container\" id=\"player\" ng-keydown=\"vlcKeyEvent($event);\">\n" +
-    "    <div ng-class=\"{true: 'player-blur-vlc' }[vlc.buffer == true]\">\n" +
+    "    <div ng-class=\"{true: 'player-blur-vlc' }[vlc.buffer == true]\" class=\"{{vlc.fullscreenClass}}\">\n" +
     "        <object classid=\"clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921\" events=\"true\" width=\"100%\" height=\"100%\" tabindex=\"0\">\n" +
     "            <embed pluginspage=\"http://www.videolan.org\"\n" +
     "                   type=\"application/x-vlc-plugin\"\n" +
@@ -193,7 +199,7 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "        </object>\n" +
     "    </div>\n" +
     "    <div class=\"video-controls\" ng-mouseover=\"vlcToolbarActive(true);\" ng-mouseleave=\"vlcToolbarActive(false);\">\n" +
-    "        <div class=\"toolbar-vlc\" ng-class=\"{true: 'toolbar-active-vlc', false: 'toolbar-disabled-vlc'}[vlc.error == true || vlc.toolbar == true]\" ng-style=\"vlc.toolbarWidth\">\n" +
+    "        <div class=\"{{vlc.toolbarClass}}\" ng-class=\"{true: 'toolbar-active-vlc', false: 'toolbar-disabled-vlc'}[vlc.error == true || vlc.toolbar == true]\" ng-style=\"vlc.toolbarWidth\">\n" +
     "            <div class=\"progress-vlc\">\n" +
     "              <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"{{ vlc.timer }}\" aria-valuemin=\"0\" aria-valuemax=\"100\" ng-style=\"{width : ( vlc.timer + '%' ) }\">\n" +
     "              </div>\n" +
