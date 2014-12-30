@@ -1,9 +1,18 @@
-/*! VLCPlayer 2014-12-28 06:12:39 */
+/*! VLCPlayer 2014-12-30 11:12:28 */
 .toolbar-vlc {
     background: rgba(32, 32, 32, 1);
     height: 30px;
     margin-top: -35px; /* place in the player */
     position: relative;
+}
+
+.toolbar-vlc-fullscreen{
+    background: rgba(32, 32, 32, 1);
+    height: 30px;
+    position: fixed;
+    bottom:0px;
+    left:0px;
+    z-index:10000;
 }
 
 .toolbar-disabled-vlc {
@@ -22,6 +31,19 @@
          -o-animation: fadein 1s; /* Opera < 11.5.1 */
             animation: fadein 1s;
     opacity: 1;
+}
+
+.vlc-window{
+    position:relative;
+    width:640px;
+    height:360px;
+}
+
+.vlc-fullscreen{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index:10000;
 }
 
 @keyframes fadein {
