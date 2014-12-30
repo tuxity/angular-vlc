@@ -1,6 +1,6 @@
-/*! VLCPlayer 2014-12-30 11:12:28 */
+/*! VLCPlayer 2014-12-30 05:12:06 */
 angular.module('kdarcel.vlc-player', [])
-    .constant('VERSION', 'v1.1.1')
+    .constant('VERSION', 'v1.1.2')
     .run(function ($rootScope, VERSION) {
         $rootScope.version = VERSION
     })

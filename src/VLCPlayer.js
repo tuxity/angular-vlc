@@ -1,5 +1,5 @@
 angular.module('kdarcel.vlc-player', [])
-    .constant('VERSION', 'v1.1.1')
+    .constant('VERSION', 'v1.1.2')
     .run(function ($rootScope, VERSION) {
         $rootScope.version = VERSION
     })

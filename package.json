@@ -1,6 +1,6 @@
 {
   "name": "angular-vlc",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "An AngularJS directive to include VLC Web Player code with a more beautiful & advanced interface",
   "author": "https://github.com/tuxity/angular-vlc/graphs/contributors",
   "license": "MIT",
