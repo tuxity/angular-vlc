@@ -1,4 +1,4 @@
-/*! VLCPlayer 2014-12-30 05:12:06 */
+/*! VLCPlayer 2015-03-21 02:03:44 */
 angular.module('kdarcel.vlc-player', [])
     .constant('VERSION', 'v1.1.2')
     .run(function ($rootScope, VERSION) {
@@ -128,6 +128,14 @@ angular.module('kdarcel.vlc-player', [])
                 scope.vlcSwitchSubtitleTrack = function(trackNumber) {
                     scope.vlc.subtitle.track = trackNumber
                 }
+
+                scope.changeTime = function(event) {
+                    var outside = document.getElementById('player-progress');
+                    var inside = document.getElementById('progress');
+                    var pct = Math.floor((event.offsetX / outside.offsetWidth) * 100);
+                    vlc.input.time = (scope.videoDuration * pct) / 100;
+                }
+
                 $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(e){
                     var pos = scope.vlc.input.position;
                     scope.vlc.playlist.stop();
@@ -206,9 +214,9 @@ angular.module("VLCPlayer.tpl.html", []).run(["$templateCache", function($templa
     "    </div>\n" +
     "    <div class=\"video-controls\" ng-mouseover=\"vlcToolbarActive(true);\" ng-mouseleave=\"vlcToolbarActive(false);\">\n" +
     "        <div class=\"{{ vlc.toolbarClass }}\" ng-class=\"{true: 'toolbar-active-vlc', false: 'toolbar-disabled-vlc'}[vlc.error == true || vlc.toolbar == true]\" ng-style=\"vlc.toolbarWidth\">\n" +
-    "            <div class=\"progress-vlc\">\n" +
-    "              <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"{{ vlc.timer }}\" aria-valuemin=\"0\" aria-valuemax=\"100\" ng-style=\"{width : ( vlc.timer + '%' ) }\">\n" +
-    "              </div>\n" +
+    "            <div class=\"progress-vlc\" id=\"player-progress\" ng-click=\"changeTime($event)\">\n" +
+    "                <div class=\"progress-bar\" id=\"progress\" role=\"progressbar\" aria-valuenow=\"{{ vlc.timer }}\" aria-valuemin=\"0\" aria-valuemax=\"100\" ng-style=\"{width : ( vlc.timer + '%' ) }\">\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "            <div class=\"form-inline pull-left\">\n" +
     "                <button type=\"button\" class=\"btn btn-default btn-default-vlc btn-xs\" tooltip=\"Play/Pause\" ng-click=\"vlcTogglePause()\">\n" +
