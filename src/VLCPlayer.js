@@ -14,22 +14,22 @@ angular.module('kdarcel.vlc-player', [])
 .filter('time2String', function() {
     return function duration(duration) {
         if (!duration)
-            return "";
+            return '';
 
         var seconds = parseInt((duration / 1000) % 60);
         var minutes = parseInt((duration / (1000 * 60)) % 60);
         var hours   = parseInt((duration / (1000 * 60 * 60)) % 24);
 
-        var durationString = "";
+        var durationString = '';
 
-        if (hours) durationString += ((hours < 10) ? "0" + hours : hours) + ":";
-        durationString += ((minutes < 10) ? "0" + minutes : minutes) + ":";
-        durationString += (seconds < 10) ? "0" + seconds : seconds;
+        if (hours) durationString += ((hours < 10) ? '0' + hours : hours) + ':';
+        durationString += ((minutes < 10) ? '0' + minutes : minutes) + ':';
+        durationString += (seconds < 10) ? '0' + seconds : seconds;
 
         return durationString;
     };
 })
-.factory("poollingFactory", function ($timeout) {
+.factory('poollingFactory', function ($timeout) {
     var timeIntervalInSec = 1;
 
     function callFnOnInterval(fn, timeInterval) {
@@ -52,20 +52,20 @@ angular.module('kdarcel.vlc-player', [])
         link: function (scope, element, attributes) {
             var setupVlcPlayer = function(vlcData) {
                 if (vlcData.url && vlcData.filename) {
-                    scope.vlc = document.getElementById("vlc");
+                    scope.vlc = document.getElementById('vlc');
                     if (scope.vlc)
                     {
                         if (scope.vlc.playlist.items.count > 0)
                             scope.vlc.playlist.items.clear();
 
-                        var options = [":vout-filter=deinterlace", ":deinterlace-mode=linear"];
+                        var options = [':vout-filter=deinterlace', ':deinterlace-mode=linear'];
                         var id = scope.vlc.playlist.add(vlcData.url, vlcData.filename, options);
 
                         if (vlcData.autoplay == 'true')
                             scope.vlc.playlist.playItem(id);
 
                         scope.vlc.version = scope.vlc.versionInfo();
-                        scope.vlc.toolbarWidth = {"width": '640'};
+                        scope.vlc.toolbarWidth = {'width': '640'};
                         scope.vlc.toolbarClass = 'toolbar-vlc';
                         scope.vlc.fullscreenClass = 'vlc-window';
                     }
@@ -159,7 +159,7 @@ angular.module('kdarcel.vlc-player', [])
 
                 if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
 
-                    var elem = document.getElementById("player");
+                    var elem = document.getElementById('player');
                     if (elem.requestFullscreen)
                       elem.requestFullscreen();
                     else if (elem.msRequestFullscreen)
