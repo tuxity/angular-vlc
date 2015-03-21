@@ -9,7 +9,7 @@ An [AngularJS](https://angularjs.org/) directive to include [VLC](http://www.vid
 
 # Screenshots
 
-![Screenshot1](http://i.imgur.com/SgMX8YU.png "angular-vlc video player")
+![Screenshot1](https://i.gyazo.com/6e0410a0d1fa2073a8f673fc6826e879.png "angular-vlc video player")
 
 
 ## Features
@@ -24,7 +24,7 @@ An [AngularJS](https://angularjs.org/) directive to include [VLC](http://www.vid
 ## Requirement
 
 You must have VLC and the Web plugin installed on your computer, more informtions on the [VLC website](http://www.videolan.org/).
-For OS X users, you can find the plugin (actually in beta) [here](https://www.dropbox.com/s/c0zubsrnmiklk51/VLC-webplugin-3.0.0-b4.dmg?dl=0).
+For OS X users, you can find the plugin (actually in beta) [here](http://download.videolan.org/pub/videolan/vlc/2.2.0/macosx/VLC-webplugin-2.2.0.dmg).
 
 
 ## Getting Started
