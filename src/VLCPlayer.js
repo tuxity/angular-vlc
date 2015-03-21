@@ -127,6 +127,14 @@ angular.module('kdarcel.vlc-player', [])
                 scope.vlcSwitchSubtitleTrack = function(trackNumber) {
                     scope.vlc.subtitle.track = trackNumber
                 }
+
+                scope.changeTime = function(event) {
+                    var outside = document.getElementById('player-progress');
+                    var inside = document.getElementById('progress');
+                    var pct = Math.floor((event.offsetX / outside.offsetWidth) * 100);
+                    vlc.input.time = (scope.videoDuration * pct) / 100;
+                }
+
                 $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function(e){
                     var pos = scope.vlc.input.position;
                     scope.vlc.playlist.stop();
