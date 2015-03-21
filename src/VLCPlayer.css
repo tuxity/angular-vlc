@@ -9,9 +9,9 @@
     background: rgba(32, 32, 32, 1);
     height: 30px;
     position: fixed;
-    bottom:0px;
-    left:0px;
-    z-index:10000;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
 }
 
 .toolbar-disabled-vlc {
@@ -33,16 +33,16 @@
 }
 
 .vlc-window{
-    position:relative;
-    width:640px;
-    height:360px;
+    position: relative;
+    width: 640px;
+    height: 360px;
 }
 
 .vlc-fullscreen{
     position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index:10000;
+    top: 0;
+    left: 0;
+    z-index: 10000;
 }
 
 @keyframes fadein {
@@ -106,7 +106,7 @@
 .progress-vlc {
     height: 5px;
     margin-bottom: 1px;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .error-vlc {
@@ -127,7 +127,7 @@
 }
 
 .vlc-text-white {
-    color:white;
+    color: white;
     font-size: 12px;
 }
 
@@ -136,6 +136,6 @@
     -webkit-filter: brightness(150%);
     background: rgba(32, 32, 32, 1);
     border-color: rgba(32, 32, 32, 1);
-    outline:0px !important;
-    -webkit-appearance:none;
+    outline: 0 !important;
+    -webkit-appearance: none;
 }
