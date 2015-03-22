@@ -48,7 +48,7 @@ angular.module('kdarcel.vlc-player', [])
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'VLCPlayer.tpl.html',
+        templateUrl: 'angular-vlc.tpl.html',
         link: function (scope, element, attributes) {
             var setupVlcPlayer = function(vlcData) {
                 if (vlcData.url && vlcData.filename) {
@@ -194,7 +194,7 @@ angular.module('kdarcel.vlc-player', [])
 try { module = angular.module("kdarcel.vlc-player.tpl"); }
 catch(err) { module = angular.module("kdarcel.vlc-player.tpl", []); }
 module.run(["$templateCache", function($templateCache) {
-  $templateCache.put("src/angular-vlc.html",
+  $templateCache.put("src/angular-vlc.tpl.html",
     "<div class=\"player-container\" id=\"player\" ng-keydown=\"vlcKeyEvent($event);\">\n" +
     "    <div ng-class=\"{true: 'player-blur-vlc' }[vlc.buffer == true]\" class=\"{{ vlc.fullscreenClass }}\">\n" +
     "        <object classid=\"clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921\" events=\"true\" width=\"100%\" height=\"100%\" tabindex=\"0\">\n" +
