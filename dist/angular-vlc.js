@@ -44,11 +44,11 @@ angular.module('kdarcel.vlc-player', [])
         callFnOnInterval: callFnOnInterval
     };
 }])
-.directive('vlcplayer', ["poollingFactory", function (poollingFactory) {
+.directive('vlcplayer', ["$templateCache", "poollingFactory", function ($templateCache, poollingFactory) {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'angular-vlc.tpl.html',
+        template: $templateCache.get('angular-vlc.tpl.html'),
         link: function (scope, element, attributes) {
             var setupVlcPlayer = function(vlcData) {
                 if (vlcData.url && vlcData.filename) {
