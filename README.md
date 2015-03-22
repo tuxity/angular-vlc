@@ -40,13 +40,13 @@ Or simply download the files in the dist folder
 Add the CSS
 
 ```html
-<link rel="stylesheet" href="components/angular-vlc/dist/VLCPlayer.min.css">
+<link rel="stylesheet" href="components/angular-vlc/dist/angular-vlc.min.css">
 ```
 
 Load the JavaScript file
 
 ```html
-<link rel="text/javascript" href="components/angular-vlc/dist/VLCPlayer.min.js">
+<link rel="text/javascript" href="components/angular-vlc/dist/angular-vlc.min.js">
 ```
 
 And finally add the dependencies to your AngularJS project

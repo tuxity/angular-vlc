@@ -4,14 +4,14 @@
   "homepage": "https://github.com/Tuxity/angular-vlc",
   "authors": [
     "Tuxity <kevin.darcel@gmail.com>",
-    "martialdidit <martial.puygrenier@gmail.com>"
+    "mpgn <martial.puygrenier@gmail.com>"
   ],
   "description": "An AngularJS directive to include VLC Web Player code with a more beautiful & advanced interface",
   "main": [
-      "dist/VLCPlayer.js",
-      "dist/VLCPlayer.css",
-      "dist/VLCPlayer.min.js",
-      "dist/VLCPlayer.min.css"
+      "dist/angular-vlc.js",
+      "dist/angular-vlc.css",
+      "dist/angular-vlc.min.js",
+      "dist/angular-vlc.min.css"
   ],
   "keywords": [
     "video",
