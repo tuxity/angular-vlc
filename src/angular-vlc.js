@@ -48,7 +48,7 @@ angular.module('kdarcel.vlc-player', [])
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'VLCPlayer.tpl.html',
+        templateUrl: 'angular-vlc.tpl.html',
         link: function (scope, element, attributes) {
             var setupVlcPlayer = function(vlcData) {
                 if (vlcData.url && vlcData.filename) {
