@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <title>angular-vlc test page</title>
+    <link href="../dist/angular-vlc.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>angular-vlc directive:</h1>
+    <br>
+    <div class="vlcplayer">
+        <vlcplayer vlc-url="http://streams.videolan.org/streams/mp4/Mr_MrsSmith-h264_aac.mp4" vlc-filename="Mr_MrsSmith-h264_aac.mp4" vlc-autoplay="true"></vlcplayer>
+    </div>
+
+    <script data-require="angular.js@1.3.x" src="https://code.angularjs.org/1.3.15/angular.js" data-semver="1.3.15"></script>
+    <script type="text/javascript" src="../dist/angular-vlc.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
