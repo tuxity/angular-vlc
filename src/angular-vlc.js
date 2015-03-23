@@ -1,4 +1,4 @@
-angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl'])
+angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl', 'ui.bootstrap'])
 .constant('VERSION', 'v1.1.2')
 .run(function ($rootScope, VERSION) {
     $rootScope.version = VERSION;

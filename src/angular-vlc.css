@@ -120,7 +120,7 @@
     filter: blur(5px);
 }
 
-.btn-default-vlc {
+.btn-default-vlc, .btn-default-vlc[disabled] {
     background: rgba(32, 32, 32, 1);
     border-color: rgba(32, 32, 32, 1);
     color: rgba(212, 212, 212, 1);

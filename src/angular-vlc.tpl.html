@@ -27,8 +27,8 @@
                 <span class="vlc-text-white">{{ videoCurrentTime | time2String }} <span ng-if="videoDuration">/ {{ videoDuration | time2String }}</span></span>
             </div>
             <div class="form-inline pull-right">
-                <div class="btn-group dropup" ng-if="vlc.audio.count" dropdown>
-                    <button type="button" class="btn btn-default btn-default-vlc btn-xs dropdown-toggle" tooltip="Audio language" data-toggle="dropdown">
+                <div class="btn-group dropup" dropdown>
+                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle tooltip="Audio language" data-toggle="dropdown" ng-disabled="vlc.audio.count == 0">
                         <span class="glyphicon glyphicon-sound-5-1"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -39,8 +39,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="btn-group dropup" ng-if="vlc.subtitle.count" dropdown>
-                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs dropdown-toggle" tooltip="Subtitles" data-toggle="dropdown">
+                <div class="btn-group dropup" dropdown>
+                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs" dropdown-toggle tooltip="Subtitles" data-toggle="dropdown" ng-disabled="vlc.subtitle.count == 0">
                         <span class="glyphicon glyphicon-subtitles"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -55,7 +55,7 @@
                     <span class="glyphicon" ng-class="vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'"></span>
                 </button>
                 <div class="btn-group dropup" dropdown>
-                    <button type="button" class="btn btn-default btn-default-vlc btn-xs dropdown-toggle" tooltip="Parameters">
+                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle tooltip="Parameters">
                         <span class="glyphicon glyphicon-cog"></span>
                     </button>
                     <ul class="dropdown-menu">
