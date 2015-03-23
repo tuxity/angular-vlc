@@ -139,18 +139,19 @@ angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl'])
                 var pos = scope.vlc.input.position;
                 scope.vlc.playlist.stop();
 
-              if ((!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement)) {
+                if ((!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement)) {
                     scope.vlc.embedFullscreen = { 'width': '640', 'height': '360'};
                     scope.vlc.toolbarWidth = {'width': '640'};
                     scope.vlc.toolbarClass = 'toolbar-vlc';
                     scope.vlc.fullscreenClass = 'vlc-window';
 
-             } else {
+                } else {
                     scope.vlc.embedFullscreen = {'width': screen.width, 'height': screen.height};
                     scope.vlc.toolbarWidth = {'width': screen.width};
                     scope.vlc.toolbarClass = 'toolbar-vlc-fullscreen';
                     scope.vlc.fullscreenClass = 'vlc-fullscreen';
-             }
+                }
+
                 scope.vlc.playlist.play();
                 scope.vlc.input.position = pos;
             });
