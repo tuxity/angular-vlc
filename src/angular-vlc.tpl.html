@@ -24,7 +24,7 @@
                 <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Play/Pause" ng-click="vlcTogglePause()">
                     <span class="glyphicon" ng-class="vlc.playlist.isPlaying ? 'glyphicon-pause' : 'glyphicon-play'"></span>
                 </button>
-                <span class="vlc-text-white">{{ videoCurrentTime | time2String }} / {{ videoDuration | time2String }}</span>
+                <span class="vlc-text-white">{{ videoCurrentTime | time2String }} <span ng-if="videoDuration">/ {{ videoDuration | time2String }}</span></span>
             </div>
             <div class="form-inline pull-right">
                 <div class="btn-group dropup" ng-if="vlc.audio.count" dropdown>

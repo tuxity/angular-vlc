@@ -14,7 +14,7 @@ angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl'])
 .filter('time2String', function() {
     return function duration(duration) {
         if (!duration)
-            return '';
+            return '00:00';
 
         var seconds = parseInt((duration / 1000) % 60);
         var minutes = parseInt((duration / (1000 * 60)) % 60);
@@ -76,8 +76,7 @@ angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl'])
                 if (scope.vlc) {
                     // if the file is playing
                     if (vlc.input.state == 3) {
-                        if (scope.videoDuration === null)
-                            scope.videoDuration = scope.vlc.input.length;
+                        scope.videoDuration = scope.vlc.input.length;
                         scope.vlc.openning = false;
                         scope.vlc.buffer = false;
                     }
