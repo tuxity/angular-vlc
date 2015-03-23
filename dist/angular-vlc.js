@@ -230,8 +230,8 @@ module.run(['$templateCache', function($templateCache) {
     '                <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Mute/Unmute" ng-click="vlcToggleMute()">\n' +
     '                    <span class="glyphicon" ng-class="vlc.audio.mute ? \'glyphicon-volume-off\' : \'glyphicon-volume-up\'"></span>\n' +
     '                </button>\n' +
-    '                <div class="btn-group dropup" dropdown>\n' +
-    '                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle tooltip="Audio tracks" data-toggle="dropdown" ng-disabled="vlc.audio.count == 0">\n' +
+    '                <div class="btn-group display-hover dropup" ng-disabled="vlc.audio.count == 0" dropdown>\n' +
+    '                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle data-toggle="dropdown" ng-disabled="vlc.audio.count == 0">\n' +
     '                        <span class="glyphicon glyphicon-sound-5-1"></span>\n' +
     '                    </button>\n' +
     '                    <ul class="dropdown-menu" role="menu">\n' +
@@ -242,8 +242,8 @@ module.run(['$templateCache', function($templateCache) {
     '                        </li>\n' +
     '                    </ul>\n' +
     '                </div>\n' +
-    '                <div class="btn-group dropup" dropdown>\n' +
-    '                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs" dropdown-toggle tooltip="Subtitle tracks" data-toggle="dropdown" ng-disabled="vlc.subtitle.count == 0">\n' +
+    '                <div class="btn-group display-hover dropup" ng-disabled="vlc.subtitle.count == 0" dropdown>\n' +
+    '                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs" dropdown-toggle data-toggle="dropdown" ng-disabled="vlc.subtitle.count == 0">\n' +
     '                        <span class="glyphicon glyphicon-subtitles"></span>\n' +
     '                    </button>\n' +
     '                    <ul class="dropdown-menu" role="menu">\n' +
