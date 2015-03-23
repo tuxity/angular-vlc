@@ -1,7 +1,7 @@
 .toolbar-vlc {
     background: rgba(32, 32, 32, 1);
     height: 30px;
-    margin-top: -35px; /* place in the player */
+    margin-top: -30px; /* place in the player */
     position: relative;
 }
 
