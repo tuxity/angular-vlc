@@ -27,11 +27,11 @@
                 <span class="vlc-text-white">{{ videoCurrentTime | time2String }} <span ng-if="videoDuration">/ {{ videoDuration | time2String }}</span></span>
             </div>
             <div class="form-inline pull-right">
-                <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Audio Sounds" ng-click="vlcToggleMute()">
+                <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Mute/Unmute" ng-click="vlcToggleMute()">
                     <span class="glyphicon" ng-class="vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'"></span>
                 </button>
                 <div class="btn-group dropup" dropdown>
-                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle tooltip="Audio language" data-toggle="dropdown" ng-disabled="vlc.audio.count == 0">
+                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle tooltip="Audio tracks" data-toggle="dropdown" ng-disabled="vlc.audio.count == 0">
                         <span class="glyphicon glyphicon-sound-5-1"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -43,7 +43,7 @@
                     </ul>
                 </div>
                 <div class="btn-group dropup" dropdown>
-                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs" dropdown-toggle tooltip="Subtitles" data-toggle="dropdown" ng-disabled="vlc.subtitle.count == 0">
+                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs" dropdown-toggle tooltip="Subtitle tracks" data-toggle="dropdown" ng-disabled="vlc.subtitle.count == 0">
                         <span class="glyphicon glyphicon-subtitles"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
