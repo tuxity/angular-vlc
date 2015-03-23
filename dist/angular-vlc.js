@@ -1,4 +1,4 @@
-angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl'])
+angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl', 'ui.bootstrap'])
 .constant('VERSION', 'v1.1.2')
 .run(["$rootScope", "VERSION", function ($rootScope, VERSION) {
     $rootScope.version = VERSION;
@@ -14,7 +14,7 @@ angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl'])
 .filter('time2String', function() {
     return function duration(duration) {
         if (!duration)
-            return '';
+            return '00:00';
 
         var seconds = parseInt((duration / 1000) % 60);
         var minutes = parseInt((duration / (1000 * 60)) % 60);
@@ -76,8 +76,7 @@ angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl'])
                 if (scope.vlc) {
                     // if the file is playing
                     if (vlc.input.state == 3) {
-                        if (scope.videoDuration === null)
-                            scope.videoDuration = scope.vlc.input.length;
+                        scope.videoDuration = scope.vlc.input.length;
                         scope.vlc.openning = false;
                         scope.vlc.buffer = false;
                     }
@@ -139,18 +138,19 @@ angular.module('kdarcel.vlc-player', ['kdarcel.vlc-player.tpl'])
                 var pos = scope.vlc.input.position;
                 scope.vlc.playlist.stop();
 
-              if ((!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement)) {
+                if ((!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement)) {
                     scope.vlc.embedFullscreen = { 'width': '640', 'height': '360'};
                     scope.vlc.toolbarWidth = {'width': '640'};
                     scope.vlc.toolbarClass = 'toolbar-vlc';
                     scope.vlc.fullscreenClass = 'vlc-window';
 
-             } else {
+                } else {
                     scope.vlc.embedFullscreen = {'width': screen.width, 'height': screen.height};
                     scope.vlc.toolbarWidth = {'width': screen.width};
                     scope.vlc.toolbarClass = 'toolbar-vlc-fullscreen';
                     scope.vlc.fullscreenClass = 'vlc-fullscreen';
-             }
+                }
+
                 scope.vlc.playlist.play();
                 scope.vlc.input.position = pos;
             });
@@ -224,11 +224,14 @@ module.run(['$templateCache', function($templateCache) {
     '                <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Play/Pause" ng-click="vlcTogglePause()">\n' +
     '                    <span class="glyphicon" ng-class="vlc.playlist.isPlaying ? \'glyphicon-pause\' : \'glyphicon-play\'"></span>\n' +
     '                </button>\n' +
-    '                <span class="vlc-text-white">{{ videoCurrentTime | time2String }} / {{ videoDuration | time2String }}</span>\n' +
+    '                <span class="vlc-text-white">{{ videoCurrentTime | time2String }} <span ng-if="videoDuration">/ {{ videoDuration | time2String }}</span></span>\n' +
     '            </div>\n' +
     '            <div class="form-inline pull-right">\n' +
-    '                <div class="btn-group dropup" ng-if="vlc.audio.count" dropdown>\n' +
-    '                    <button type="button" class="btn btn-default btn-default-vlc btn-xs dropdown-toggle" tooltip="Audio language" data-toggle="dropdown">\n' +
+    '                <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Mute/Unmute" ng-click="vlcToggleMute()">\n' +
+    '                    <span class="glyphicon" ng-class="vlc.audio.mute ? \'glyphicon-volume-off\' : \'glyphicon-volume-up\'"></span>\n' +
+    '                </button>\n' +
+    '                <div class="btn-group dropup" dropdown>\n' +
+    '                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle tooltip="Audio tracks" data-toggle="dropdown" ng-disabled="vlc.audio.count == 0">\n' +
     '                        <span class="glyphicon glyphicon-sound-5-1"></span>\n' +
     '                    </button>\n' +
     '                    <ul class="dropdown-menu" role="menu">\n' +
@@ -239,8 +242,8 @@ module.run(['$templateCache', function($templateCache) {
     '                        </li>\n' +
     '                    </ul>\n' +
     '                </div>\n' +
-    '                <div class="btn-group dropup" ng-if="vlc.subtitle.count" dropdown>\n' +
-    '                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs dropdown-toggle" tooltip="Subtitles" data-toggle="dropdown">\n' +
+    '                <div class="btn-group dropup" dropdown>\n' +
+    '                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs" dropdown-toggle tooltip="Subtitle tracks" data-toggle="dropdown" ng-disabled="vlc.subtitle.count == 0">\n' +
     '                        <span class="glyphicon glyphicon-subtitles"></span>\n' +
     '                    </button>\n' +
     '                    <ul class="dropdown-menu" role="menu">\n' +
@@ -251,11 +254,8 @@ module.run(['$templateCache', function($templateCache) {
     '                        </li>\n' +
     '                    </ul>\n' +
     '                </div>\n' +
-    '                <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Audio Sounds" ng-click="vlcToggleMute()">\n' +
-    '                    <span class="glyphicon" ng-class="vlc.audio.mute ? \'glyphicon-volume-off\' : \'glyphicon-volume-up\'"></span>\n' +
-    '                </button>\n' +
     '                <div class="btn-group dropup" dropdown>\n' +
-    '                    <button type="button" class="btn btn-default btn-default-vlc btn-xs dropdown-toggle" tooltip="Parameters">\n' +
+    '                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle tooltip="Parameters">\n' +
     '                        <span class="glyphicon glyphicon-cog"></span>\n' +
     '                    </button>\n' +
     '                    <ul class="dropdown-menu">\n' +
