@@ -4,8 +4,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     minifyCSS = require('gulp-minify-css'),
     ngAnnotate = require('gulp-ng-annotate'),
-    ngHtml2Js = require("gulp-ng-html2js"),
-    gulpFilter = require('gulp-filter');
+    ngHtml2Js = require("gulp-ng-html2js");
 
 gulp.task('styles', function() {
   gulp.src('src/*.css')
