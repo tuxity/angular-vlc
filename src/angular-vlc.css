@@ -107,6 +107,7 @@
     height: 5px;
     margin-bottom: 1px;
     border-radius: 0;
+    cursor: pointer;
 }
 
 .error-vlc {
