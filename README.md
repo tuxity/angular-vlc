@@ -52,7 +52,7 @@ Load the JavaScript file
 And finally add the dependencies to your AngularJS project
 
 ```javascript
-var myAppModule = angular.module('MyApp', ['kdarcel.vlc-player', 'kdarcel.vlc-player.tpl']);
+var myAppModule = angular.module('MyApp', ['kdarcel.vlc-player']);
 ```
 
 Now you can call the directive in your code

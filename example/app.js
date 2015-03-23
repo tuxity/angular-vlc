@@ -1,1 +1,1 @@
-var app = angular.module('myApp', ['kdarcel.vlc-player', 'kdarcel.vlc-player.tpl']);
+var app = angular.module('myApp', ['kdarcel.vlc-player']);
