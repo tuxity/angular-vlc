@@ -24,7 +24,7 @@ An [AngularJS](https://angularjs.org/) directive to include [VLC](http://www.vid
 ## Requirement
 
 You must have VLC and the Web plugin installed on your computer, more informations on the [VLC website](http://www.videolan.org/).
-For OS X users, you can find the plugin (actually in beta) [here](http://download.videolan.org/pub/videolan/vlc/2.2.4/macosx/VLC-webplugin-2.2.1.dmg).
+For OS X users, you can find the plugin (actually in beta) [here](http://download.videolan.org/pub/videolan/vlc/2.2.4/macosx/VLC-webplugin-2.2.4.dmg).
 
 * Don't forget to activate support of NPAPI and ActiveX plugins in your browser *
 
