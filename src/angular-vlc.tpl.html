@@ -30,8 +30,8 @@
                 <button type="button" class="btn btn-default btn-default-vlc btn-xs" tooltip="Mute/Unmute" ng-click="vlcToggleMute()">
                     <span class="glyphicon" ng-class="vlc.audio.mute ? 'glyphicon-volume-off' : 'glyphicon-volume-up'"></span>
                 </button>
-                <div class="btn-group display-hover dropup" ng-disabled="vlc.audio.count == 0" dropdown>
-                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle data-toggle="dropdown" ng-disabled="vlc.audio.count == 0">
+                <div class="btn-group display-hover dropup" ng-disabled="vlc.audio.count == 0" uib-dropdown>
+                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" uib-dropdown-toggle data-toggle="dropdown" ng-disabled="vlc.audio.count == 0">
                         <span class="glyphicon glyphicon-sound-5-1"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -42,8 +42,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="btn-group display-hover dropup" ng-disabled="vlc.subtitle.count == 0" dropdown>
-                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs" dropdown-toggle data-toggle="dropdown" ng-disabled="vlc.subtitle.count == 0">
+                <div class="btn-group display-hover dropup" ng-disabled="vlc.subtitle.count == 0" uib-dropdown>
+                    <button type="button" class="btn btn-default  btn-default-vlc btn-xs" uib-dropdown-toggle data-toggle="dropdown" ng-disabled="vlc.subtitle.count == 0">
                         <span class="glyphicon glyphicon-subtitles"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
@@ -54,11 +54,11 @@
                         </li>
                     </ul>
                 </div>
-                <div class="btn-group dropup" dropdown>
-                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" dropdown-toggle tooltip="Parameters">
+                <div class="btn-group dropup" uib-dropdown>
+                    <button type="button" class="btn btn-default btn-default-vlc btn-xs" uib-dropdown-toggle tooltip="Parameters">
                         <span class="glyphicon glyphicon-cog"></span>
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" uib-dropdown-menu>
                         <li><a href="https://github.com/Tuxity/angular-vlc/tree/{{ version }}" target="blank"> About angular-vlc </a></li>
                         <li><a href=""> VLC {{ vlc.version }}</a></li>
                     </ul>
